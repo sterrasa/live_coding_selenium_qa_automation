@@ -12,7 +12,7 @@ export const name_validation = {
     },
     maxLength: {
       value: 30,
-      message: '30 characters max',
+      message: 'The name field exceeds the character limit',
     },
   },
 }

@@ -31,7 +31,7 @@ describe('Test form', () => {
     await inputPassword.sendKeys('test1234');
 
     const inputDescription = await driver.findElement(By.id('description'));
-    await inputDescription.sendKeys('test1234');
+    await inputDescription.sendKeys('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae diam a massa condimentum consequat. Integer nec risus dolor.');
 
     const submitButton = await driver.findElement(By.id('submit'));
     await submitButton.click();
@@ -98,4 +98,30 @@ describe('Test form', () => {
     const messageText = await errorMessage.getText();
     expect(messageText).toBe('Invalid');
   });
+
+  it('Should display error message for exceeding character limit in name field', async () => {
+    // Open the page
+    await driver.get('http://localhost:3000');
+  
+    // Find the name field and enter a value exceeding the character limit
+    const inputName = await driver.findElement(By.id('name'));
+    const longName = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae diam a massa condimentum consequat. Integer nec risus dolor.';
+    await inputName.sendKeys(longName);
+  
+    // Submit the form
+    const submitButton = await driver.findElement(By.id('submit'));
+    await submitButton.click();
+  
+    // Wait for the error message to be displayed
+    await driver.wait(
+      until.elementLocated(By.xpath("//*[contains(text(), 'The name field exceeds the character limit')]")),
+      5000
+    );
+  
+    // Check the error message
+    const errorMessage = await driver.findElement(By.xpath("//*[contains(text(), 'The name field exceeds the character limit')]"));
+    const messageText = await errorMessage.getText();
+    expect(messageText).toBe('The name field exceeds the character limit');
+  });
+
 });
