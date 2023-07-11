@@ -1,5 +1,6 @@
 import { By, until } from 'selenium-webdriver';
 import { getDriver } from './helpers';
+import { getTomorrowDate } from '../utils';
 
 describe('Test form', () => {
   let driver;
@@ -42,8 +43,9 @@ describe('Test form', () => {
 
     await findAndType('name', 'Test Name');
     await findAndType('email', 'test@test.com');
-    await findAndType('num', '3');
+    await findAndType('birthdate','26/03/1987');
     await findAndType('password', 'test1234');
+    await findAndType('num', '3');
     await findAndType('description', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae diam a massa condimentum consequat. Integer nec risus dolor.');
 
     await clickSubmitButton();
@@ -80,4 +82,14 @@ describe('Test form', () => {
 
     await waitAndCheckErrorMessage('The name field exceeds the character limit');
   });
+
+  it('Should display error message for birthdate when date is > than today', async () => {
+    await openPage();
+
+    const tomorrow = getTomorrowDate()
+    await findAndType('birthdate', tomorrow);
+    await clickSubmitButton();
+    await waitAndCheckErrorMessage('The birth date must be earlier than today.');
+  });
+  
 });
