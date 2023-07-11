@@ -1,15 +1,16 @@
-import { Input } from './'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { BsFillCheckSquareFill } from 'react-icons/bs'
+import { GrMail } from 'react-icons/gr'
+import { Input } from './'
 import {
   name_validation,
   desc_validation,
+  birthdate_validation,
   email_validation,
   num_validation,
   password_validation,
 } from '../utils/inputValidations'
-import { useState } from 'react'
-import { GrMail } from 'react-icons/gr'
-import { BsFillCheckSquareFill } from 'react-icons/bs'
 
 export const Form = () => {
   const methods = useForm()
@@ -31,9 +32,10 @@ export const Form = () => {
       >
         <div className="grid gap-5 md:grid-cols-2">
           <Input {...name_validation} />
+          <Input {...birthdate_validation} />
           <Input {...email_validation} />
-          <Input {...num_validation} />
           <Input {...password_validation} />
+          <Input {...num_validation} />
           <Input {...desc_validation} className="md:col-span-2" />
         </div>
         <div className="mt-5">
