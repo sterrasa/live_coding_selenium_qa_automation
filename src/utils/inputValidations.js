@@ -1,3 +1,5 @@
+import { isValidateBirthdate } from './dateValidation';
+
 export const name_validation = {
   name: 'name',
   label: 'name',
@@ -89,7 +91,6 @@ export const email_validation = {
   },
 }
 
-
 export const birthdate_validation = {
   name: 'birthdate',
   label: 'birth date',
@@ -102,10 +103,6 @@ export const birthdate_validation = {
       value: true,
       message: 'required',
     },
-    pattern: {
-      value:
-      /^(0?[1-9]|1[0-9]|2[0-9]|3[01]) (0?[1-9]|1[012]) \d{2}$/,
-      message: 'Date is not valid',
-    },
+    validate: isValidateBirthdate
   },
 }

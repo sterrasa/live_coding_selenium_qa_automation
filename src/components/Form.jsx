@@ -45,6 +45,7 @@ export const Form = () => {
             </p>
           )}
           <button
+            id='submit'
             onClick={onSubmit}
             className="p-5 rounded-md bg-blue-600 font-semibold text-white flex items-center gap-1 hover:bg-blue-800"
           >
